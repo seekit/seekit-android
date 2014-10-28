@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="gen"/>
+	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
+	<classpathentry kind="lib" path="C:/Users/maximiliano-hill/Desktop/tesis/jars/android-async-http-1.4.6.jar"/>
+	<classpathentry kind="lib" path="C:/adt-bundle-windows-x86-20140702/sdk/tools/support/annotations.jar"/>
+	<classpathentry kind="output" path="bin/classes"/>
+</classpath>

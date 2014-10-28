@@ -1,0 +1,24 @@
+# view AndroidManifest.xml #generated:64
+-keep class com.example.seekit.AddTri { <init>(...); }
+
+# view AndroidManifest.xml #generated:39
+-keep class com.example.seekit.Login { <init>(...); }
+
+# view AndroidManifest.xml #generated:68
+-keep class com.example.seekit.MainActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:52
+-keep class com.example.seekit.Maps { <init>(...); }
+
+# view AndroidManifest.xml #generated:48
+-keep class com.example.seekit.PantallaRastreo { <init>(...); }
+
+# view AndroidManifest.xml #generated:72
+-keep class com.example.seekit.Registro { <init>(...); }
+
+# view res/layout/activity_maps.xml #generated:2
+-keep class com.google.android.gms.maps.SupportMapFragment { <init>(...); }
+
+# onClick res/layout/activity_login.xml #generated:99
+-keepclassmembers class * { *** Ingresar(...); }
+

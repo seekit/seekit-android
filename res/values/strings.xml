@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">SeekIt</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">NOOOOO</string>
+    <string name="action_new">Add TRI</string>
+    <string name="button_send">algo</string>
+    <string name="title_activity_pantalla_rastreo">PantallaRastreo</string>
+    <string name="title_activity_mainactivity">TRIs</string>
+    <string name="title_activity_maps">Maps</string>
+    <string name="title_activity_add_tri">AddTri</string>
+    <string name="title_activity_login">Login</string>
+    <string name="title_activity_registro">Registro</string>
+
+</resources>
