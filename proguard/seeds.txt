@@ -74,6 +74,9 @@ android.support.v4.widget.SwipeRefreshLayout: void setRefreshing(boolean)
 android.support.v4.widget.SwipeRefreshLayout: void setTargetOffsetTopAndBottom(int)
 com.example.seekit.AddTri
 com.example.seekit.AddTri: AddTri()
+com.example.seekit.Login
+com.example.seekit.Login: Login()
+com.example.seekit.Login: void Ingresar(android.view.View)
 com.example.seekit.MainActivity
 com.example.seekit.MainActivity: MainActivity()
 com.example.seekit.Maps
@@ -141,7 +144,9 @@ com.example.seekit.R$color: int wallet_primary_text_holo_light
 com.example.seekit.R$color: int wallet_secondary_text_holo_dark
 com.example.seekit.R$dimen: int activity_horizontal_margin
 com.example.seekit.R$dimen: int activity_vertical_margin
+com.example.seekit.R$drawable: int background7
 com.example.seekit.R$drawable: int bici
+com.example.seekit.R$drawable: int borders
 com.example.seekit.R$drawable: int common_full_open_on_phone
 com.example.seekit.R$drawable: int common_ic_googleplayservices
 com.example.seekit.R$drawable: int common_signin_btn_icon_dark
@@ -170,6 +175,7 @@ com.example.seekit.R$drawable: int common_signin_btn_text_pressed_dark
 com.example.seekit.R$drawable: int common_signin_btn_text_pressed_light
 com.example.seekit.R$drawable: int ic_action_new
 com.example.seekit.R$drawable: int ic_launcher
+com.example.seekit.R$drawable: int ic_launcher_mdpi
 com.example.seekit.R$drawable: int ic_plusone_medium_off_client
 com.example.seekit.R$drawable: int ic_plusone_small_off_client
 com.example.seekit.R$drawable: int ic_plusone_standard_off_client
@@ -182,6 +188,7 @@ com.example.seekit.R$drawable: int im_kiwi
 com.example.seekit.R$drawable: int im_loro
 com.example.seekit.R$drawable: int im_pavo
 com.example.seekit.R$drawable: int im_pinguino
+com.example.seekit.R$drawable: int logo
 com.example.seekit.R$drawable: int lost_icon
 com.example.seekit.R$drawable: int map_icon
 com.example.seekit.R$drawable: int powered_by_google_dark
@@ -192,16 +199,25 @@ com.example.seekit.R$id: int ListView_listado
 com.example.seekit.R$id: int RContenedor
 com.example.seekit.R$id: int RelativeLayoutimg
 com.example.seekit.R$id: int TextViewFoto
+com.example.seekit.R$id: int aceptar
 com.example.seekit.R$id: int action_new
 com.example.seekit.R$id: int action_settings
+com.example.seekit.R$id: int apellido
 com.example.seekit.R$id: int book_now
-com.example.seekit.R$id: int button1
+com.example.seekit.R$id: int botonLogin
+com.example.seekit.R$id: int botones
+com.example.seekit.R$id: int buttonAddriAccept
 com.example.seekit.R$id: int buyButton
 com.example.seekit.R$id: int buy_now
 com.example.seekit.R$id: int buy_with_google
+com.example.seekit.R$id: int cancelar
 com.example.seekit.R$id: int classic
+com.example.seekit.R$id: int comentario
+com.example.seekit.R$id: int contrasena
 com.example.seekit.R$id: int editDescripcion
 com.example.seekit.R$id: int editNombe
+com.example.seekit.R$id: int email
+com.example.seekit.R$id: int fechaNacimiento
 com.example.seekit.R$id: int grayscale
 com.example.seekit.R$id: int holo_dark
 com.example.seekit.R$id: int holo_light
@@ -211,35 +227,59 @@ com.example.seekit.R$id: int imageButtonMap
 com.example.seekit.R$id: int imageButtonShare
 com.example.seekit.R$id: int imageView1
 com.example.seekit.R$id: int imageView_imagen
+com.example.seekit.R$id: int ingresarApellido
+com.example.seekit.R$id: int ingresarFecha
+com.example.seekit.R$id: int ingresarMail
+com.example.seekit.R$id: int ingresarNombre
 com.example.seekit.R$id: int linearLayoutBtns
+com.example.seekit.R$id: int login
+com.example.seekit.R$id: int logoSeekIt
+com.example.seekit.R$id: int mail
 com.example.seekit.R$id: int map
 com.example.seekit.R$id: int match_parent
 com.example.seekit.R$id: int monochrome
+com.example.seekit.R$id: int nombre
 com.example.seekit.R$id: int none
 com.example.seekit.R$id: int normal
+com.example.seekit.R$id: int notAUSer
+com.example.seekit.R$id: int pass
+com.example.seekit.R$id: int password
 com.example.seekit.R$id: int production
+com.example.seekit.R$id: int register
+com.example.seekit.R$id: int registrarse
+com.example.seekit.R$id: int registroApellido
+com.example.seekit.R$id: int registroBirth
+com.example.seekit.R$id: int registroMail
+com.example.seekit.R$id: int registroNombre
+com.example.seekit.R$id: int registroPass
 com.example.seekit.R$id: int sandbox
 com.example.seekit.R$id: int satellite
 com.example.seekit.R$id: int selectionDetails
 com.example.seekit.R$id: int strict_sandbox
+com.example.seekit.R$id: int switch1
 com.example.seekit.R$id: int terrain
 com.example.seekit.R$id: int textView1
 com.example.seekit.R$id: int textView2
 com.example.seekit.R$id: int textView3
 com.example.seekit.R$id: int textView_inferior
 com.example.seekit.R$id: int textView_superior
+com.example.seekit.R$id: int username
 com.example.seekit.R$id: int wrap_content
 com.example.seekit.R$integer: int google_play_services_version
 com.example.seekit.R$layout: int activity_add_tri
+com.example.seekit.R$layout: int activity_login
 com.example.seekit.R$layout: int activity_main
 com.example.seekit.R$layout: int activity_maps
 com.example.seekit.R$layout: int activity_pantalla_rastreo
+com.example.seekit.R$layout: int activity_registro
 com.example.seekit.R$layout: int entrada
 com.example.seekit.R$layout: int listado
 com.example.seekit.R$menu: int add_tri
+com.example.seekit.R$menu: int login
 com.example.seekit.R$menu: int main
 com.example.seekit.R$menu: int maps
 com.example.seekit.R$menu: int pantalla_rastreo
+com.example.seekit.R$menu: int registro
 com.example.seekit.R$string: int accept
 com.example.seekit.R$string: int action_new
 com.example.seekit.R$string: int action_settings
@@ -280,11 +320,16 @@ com.example.seekit.R$string: int hello_world
 com.example.seekit.R$string: int store_picture_message
 com.example.seekit.R$string: int store_picture_title
 com.example.seekit.R$string: int title_activity_add_tri
+com.example.seekit.R$string: int title_activity_login
+com.example.seekit.R$string: int title_activity_mainactivity
 com.example.seekit.R$string: int title_activity_maps
 com.example.seekit.R$string: int title_activity_pantalla_rastreo
+com.example.seekit.R$string: int title_activity_registro
 com.example.seekit.R$string: int wallet_buy_button_place_holder
+com.example.seekit.R$style: int ActionBarTheme
 com.example.seekit.R$style: int AppBaseTheme
 com.example.seekit.R$style: int AppTheme
+com.example.seekit.R$style: int MyActionBar_TitleTextStyle
 com.example.seekit.R$style: int Theme_IAPTheme
 com.example.seekit.R$style: int WalletFragmentDefaultButtonTextAppearance
 com.example.seekit.R$style: int WalletFragmentDefaultDetailsHeaderTextAppearance
@@ -326,6 +371,8 @@ com.example.seekit.R$styleable: int WalletFragmentStyle_maskedWalletDetailsHeade
 com.example.seekit.R$styleable: int WalletFragmentStyle_maskedWalletDetailsLogoImageType
 com.example.seekit.R$styleable: int WalletFragmentStyle_maskedWalletDetailsLogoTextColor
 com.example.seekit.R$styleable: int WalletFragmentStyle_maskedWalletDetailsTextAppearance
+com.example.seekit.Registro
+com.example.seekit.Registro: Registro()
 com.google.ads.AdRequest$ErrorCode: com.google.ads.AdRequest$ErrorCode[] values()
 com.google.ads.AdRequest$ErrorCode: com.google.ads.AdRequest$ErrorCode valueOf(java.lang.String)
 com.google.ads.AdRequest$Gender: com.google.ads.AdRequest$Gender[] values()

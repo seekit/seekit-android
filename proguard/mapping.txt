@@ -1441,21 +1441,29 @@ com.example.seekit.Lista_entrada -> com.example.seekit.b:
     int idImagen -> a
     java.lang.String textoEncima -> b
     java.lang.String textoDebajo -> c
-    java.lang.String btn -> d
-    java.lang.String getBtn() -> a
-    java.lang.String get_textoEncima() -> b
-    java.lang.String get_textoDebajo() -> c
-    int get_idImagen() -> d
+    java.lang.String get_textoEncima() -> a
+    java.lang.String get_textoDebajo() -> b
+    int get_idImagen() -> c
+com.example.seekit.Login -> com.example.seekit.Login:
+    android.widget.TextView textViewRegistrarse -> a
+    void onCreate(android.os.Bundle) -> onCreate
+    void inicializadores() -> a
+    void Ingresar(android.view.View) -> Ingresar
+    boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
+    boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
+com.example.seekit.Login$1 -> com.example.seekit.c:
+    com.example.seekit.Login this$0 -> a
+    void onClick(android.view.View) -> onClick
 com.example.seekit.MainActivity -> com.example.seekit.MainActivity:
     android.widget.ListView lista -> a
     void onCreate(android.os.Bundle) -> onCreate
     boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
     boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
-com.example.seekit.MainActivity$1 -> com.example.seekit.c:
+com.example.seekit.MainActivity$1 -> com.example.seekit.d:
     com.example.seekit.MainActivity this$0 -> a
     void onEntrada(java.lang.Object,android.view.View) -> a
     com.example.seekit.MainActivity access$0(com.example.seekit.MainActivity$1) -> a
-com.example.seekit.MainActivity$1$1 -> com.example.seekit.d:
+com.example.seekit.MainActivity$1$1 -> com.example.seekit.e:
     com.example.seekit.MainActivity$1 this$1 -> a
     android.widget.TextView val$texto_inferior_entrada -> b
     void onClick(android.view.View) -> onClick
@@ -1471,15 +1479,19 @@ com.example.seekit.PantallaRastreo -> com.example.seekit.PantallaRastreo:
     void ImagenesListeners() -> a
     boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
     boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
-com.example.seekit.PantallaRastreo$1 -> com.example.seekit.e:
+com.example.seekit.PantallaRastreo$1 -> com.example.seekit.f:
     com.example.seekit.PantallaRastreo this$0 -> a
     void onClick(android.view.View) -> onClick
-com.example.seekit.PantallaRastreo$2 -> com.example.seekit.f:
+com.example.seekit.PantallaRastreo$2 -> com.example.seekit.g:
     com.example.seekit.PantallaRastreo this$0 -> a
     void onClick(android.view.View) -> onClick
-com.example.seekit.PantallaRastreo$3 -> com.example.seekit.g:
+com.example.seekit.PantallaRastreo$3 -> com.example.seekit.h:
     com.example.seekit.PantallaRastreo this$0 -> a
     void onClick(android.view.View) -> onClick
+com.example.seekit.Registro -> com.example.seekit.Registro:
+    void onCreate(android.os.Bundle) -> onCreate
+    boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
+    boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
 com.google.android.gms.R -> com.google.android.gms.a:
 com.google.android.gms.R$string -> com.google.android.gms.b:
     int accept -> accept

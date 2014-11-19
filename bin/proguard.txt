@@ -19,6 +19,15 @@
 # view res/layout/activity_maps.xml #generated:2
 -keep class com.google.android.gms.maps.SupportMapFragment { <init>(...); }
 
-# onClick res/layout/activity_login.xml #generated:99
+# onClick res/layout/activity_login.xml #generated:98
 -keepclassmembers class * { *** Ingresar(...); }
+
+# onClick res/layout/activity_add_tri.xml #generated:186
+-keepclassmembers class * { *** agregarTri(...); }
+
+# onClick res/layout/activity_registro.xml #generated:222
+-keepclassmembers class * { *** cancelar(...); }
+
+# onClick res/layout/activity_registro.xml #generated:214
+-keepclassmembers class * { *** registrar(...); }
 

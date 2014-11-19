@@ -1366,8 +1366,6 @@ android.support.v4.widget.ViewDragHelper$2
 android.support.v4.widget.ViewDragHelper$Callback:
     148:148:public ViewDragHelper$Callback()
 com.example.seekit.BuildConfig
-com.example.seekit.Lista_entrada:
-    26:27:public void setBtn(java.lang.String)
 com.example.seekit.Manifest
 com.example.seekit.Manifest$permission
 com.example.seekit.ObtenerJson
