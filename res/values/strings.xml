@@ -4,7 +4,10 @@
     <string name="app_name">SeekIt</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">NOOOOO</string>
+    <string name="action_editUsu">Perfil</string>
+    <string name="action_editTri">edicion</string>
     <string name="action_new">Add TRI</string>
+    <string name="action_notificaciones">notificaciones</string>
     <string name="button_send">algo</string>
     <string name="title_activity_pantalla_rastreo">PantallaRastreo</string>
     <string name="title_activity_mainactivity">TRIs</string>
@@ -12,5 +15,9 @@
     <string name="title_activity_add_tri">AddTri</string>
     <string name="title_activity_login">Login</string>
     <string name="title_activity_registro">Registro</string>
+    <string name="title_activity_editar_usuario">EditarUsuario</string>
+    <string name="title_activity_editar_tri">EditarTri</string>
+    <string name="title_activity_pantalla_compartir">PantallaCompartir</string>
+    <string name="title_activity_pantalla_notoficaciones">PantallaNotoficaciones</string>
 
 </resources>

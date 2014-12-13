@@ -19,7 +19,7 @@
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <!--
 The following two permissions are not required to use
-Google Maps Android API v2, but are recommended.
+Google Maps Android API v2, but are recommended.
     -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -69,6 +69,22 @@ Google Maps Android API v2, but are recommended.
         <activity
             android:name=".Registro"
             android:label="@string/title_activity_registro" >
+        </activity>
+        <activity
+            android:name=".EditarUsuario"
+            android:label="@string/title_activity_editar_usuario" >
+        </activity>
+        <activity
+            android:name=".EditarTri"
+            android:label="@string/title_activity_editar_tri" >
+        </activity>
+        <activity
+            android:name=".PantallaCompartir"
+            android:label="@string/title_activity_pantalla_compartir" >
+        </activity>
+        <activity
+            android:name=".PantallaNotoficaciones"
+            android:label="@string/title_activity_pantalla_notoficaciones" >
         </activity>
     </application>
 

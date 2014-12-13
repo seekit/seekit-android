@@ -65,6 +65,7 @@ public class Login extends Activity {
 		inicializadores();
 
 	}
+	
 
 	private boolean isNetworkAvailable() {
 		ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -194,7 +195,7 @@ public class Login extends Activity {
 				EditText editMail = (EditText) findViewById(R.id.email);
 				String mail = editMail.getText().toString();
 
-				Log.d("seekit", "Me cai?");
+				
 				EditText editPass = (EditText) findViewById(R.id.contrasena);
 				String pass = editPass.getText().toString();
 				HttpClient client = new DefaultHttpClient();
@@ -220,6 +221,7 @@ public class Login extends Activity {
 
 						while ((line = reader.readLine()) != null) {
 							builder.append(line);
+							Log.d("Login",line);
 							jsonResponse = new JSONObject(line);
 
 						}

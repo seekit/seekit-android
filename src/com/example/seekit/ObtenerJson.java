@@ -119,7 +119,7 @@ public class ObtenerJson {
 					for (int i = 0; i < arrayTris.length(); i++) {
 
 						JSONObject tri = (JSONObject) arrayTris.get(i);
-						Tri triAux = new Tri(tri.getString("identificador"),
+						Tri triAux = new Tri(tri.getString("idTri"),tri.getString("identificador"),
 								tri.getString("nombre"), tri.getString("foto"),
 								tri.getString("activo"), tri
 										.getString("localizacion"), tri

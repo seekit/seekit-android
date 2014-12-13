@@ -1,0 +1,160 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.seekit.EditarTri" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/textViewNombreEditarTri"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="0.51"
+                android:text="Nombre"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/editNombreEditarTri"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/textViewMACEditarTri"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Ingrese la MAC de su Dispositivo:"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <EditText
+                android:id="@+id/editMAC1EditarTri"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:digits="abcde1234567890"
+                android:maxLength="2" />
+
+            <EditText
+                android:id="@+id/editMAC2EditarTri"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:digits="abcde1234567890"
+                android:maxLength="2" />
+
+            <EditText
+                android:id="@+id/editMAC3EditarTri"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:digits="abcde1234567890"
+                android:maxLength="2" />
+
+            <EditText
+                android:id="@+id/editMAC4EditarTri"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:digits="abcde1234567890"
+                android:maxLength="2" />
+
+            <EditText
+                android:id="@+id/editMAC5EditarTri"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:digits="abcde1234567890"
+                android:maxLength="2" />
+
+            <EditText
+                android:id="@+id/editMAC6EditarTri"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:digits="abcde1234567890"
+                android:maxLength="2" />
+
+            <EditText
+                android:id="@+id/editMAC7EditarTri"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:digits="abcde1234567890"
+                android:maxLength="2" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/textViewFotoEditarTri"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="0.41"
+                android:text="Foto"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/editViewFotoEditarTri"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:hint="Foto" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/buttonAddriAcceptEditarTri"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="115dp"
+            android:layout_marginTop="30dp"
+            android:onClick="editarTri"
+            android:text="Aceptar" />
+    </LinearLayout>
+
+</LinearLayout>

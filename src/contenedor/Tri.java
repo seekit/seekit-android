@@ -1,6 +1,7 @@
 package contenedor;
 
 public class Tri {
+	private String idTri;
 	private String identificador;
 	private String nombre;
 	private String foto;
@@ -11,9 +12,10 @@ public class Tri {
 
 
 
-	public Tri(String identificador, String nombre, String foto, String activo,
+	public Tri(String idTri, String identificador, String nombre, String foto, String activo,
 			String localizacion, String perdido, String compartido) {
 		super();
+		this.idTri=idTri;
 		this.identificador = identificador;
 		this.nombre = nombre;
 		this.foto = foto;
@@ -22,6 +24,17 @@ public class Tri {
 		this.perdido = perdido;
 		this.compartido = compartido;
 	}
+	
+
+	public String getIdTri() {
+		return idTri;
+	}
+
+
+	public void setIdTri(String idTri) {
+		this.idTri = idTri;
+	}
+
 
 	public String getIdentificador() {
 		return identificador;

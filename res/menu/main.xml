@@ -7,12 +7,17 @@
         android:icon="@drawable/ic_action_new"
         android:showAsAction="ifRoom"
         android:title="@string/action_new"/>
-    <!--
+    
         <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_editUsu"
         android:orderInCategory="100"
-        android:showAsAction="always"
-        android:title="@string/action_settings"/>
-    -->
-
+        android:showAsAction="never"
+        android:title="@string/action_editUsu"/>
+        
+        <item
+        android:id="@+id/action_notificaciones"
+        android:icon="@drawable/ic_action_email"
+        android:showAsAction="ifRoom"
+        android:title="@string/action_notificaciones"/>
+    
 </menu>

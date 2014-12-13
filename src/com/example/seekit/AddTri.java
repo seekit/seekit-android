@@ -155,6 +155,7 @@ public class AddTri extends Activity {
 				
 				JSONObject obj = new JSONObject(getIntent().getStringExtra(
 						"json"));
+				Log.d("addTri",obj.toString());
 				
 
 				EditText eEditNombe = (EditText) findViewById(R.id.editNombeAddTri);
@@ -210,14 +211,14 @@ public class AddTri extends Activity {
 				HttpClient client = new DefaultHttpClient();
 				Log.d("VEAMOS Q ESTOY HACIENDO",
 						"http://192.168.56.1:8080/seekit/seekit/addTri?idUsuario="
-								+ obj.getJSONObject("usuario").getString(
+								+ obj.getString(
 										"idUsuario") + "&identificador="
 								+ identificador + "&nombre=" + nombre
 								+ "&foto=" + null);
 				
 				HttpGet httpGet = new HttpGet(
 						"http://192.168.56.1:8080/seekit/seekit/addTri?idUsuario="
-								+ obj.getJSONObject("usuario").getString(
+								+ obj.getString(
 										"idUsuario") + "&identificador="
 								+ identificador + "&nombre=" + nombre
 								+ "&foto=" + null);

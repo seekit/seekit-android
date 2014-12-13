@@ -113,13 +113,15 @@ public class Registro extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+
 	// en caso de click en aceptar, hay que registrar.
-		public void cancelar(View view) {
-			Intent itn = new Intent(Registro.this, Login.class);
-			
-			startActivity(itn);
-			
-		}
+	public void cancelar(View view) {
+		Intent itn = new Intent(Registro.this, Login.class);
+
+		startActivity(itn);
+
+	}
+
 	// en caso de click en aceptar, hay que registrar.
 	public void registrar(View view) {
 
@@ -234,40 +236,25 @@ public class Registro extends Activity {
 					HttpResponse response = client.execute(httpGet);
 					StatusLine statusLine = response.getStatusLine();
 					statusCode = statusLine.getStatusCode();
+					StringBuilder builder = new StringBuilder();
 					// Ahora ya lo registre, pero quiero que luego del registro
 					// vaya al mainativity. Lo ideal es pasarle al main ya el
 					// json con el usuario, por lo que una ves registrarlo debo
 					// de obtenerlo.
 					if (statusCode == 200) {
-						httpGet = new HttpGet(
-								"http://192.168.56.1:8080/seekit/seekit/login?mail="
-										+ mail + "&contrasenia=" + contrasena);
 
-						try {
-							StringBuilder builder = new StringBuilder();
-							response = client.execute(httpGet);
-							statusLine = response.getStatusLine();
-							statusCode = statusLine.getStatusCode();
-							if (statusCode == 200) {
-								Log.i("viene bien1,5", "Con el default client");
-								HttpEntity entity = response.getEntity();
-								InputStream content = entity.getContent();
-								BufferedReader reader = new BufferedReader(
-										new InputStreamReader(content));
-								String line;
+						HttpEntity entity = response.getEntity();
+						InputStream content = entity.getContent();
+						BufferedReader reader = new BufferedReader(
+								new InputStreamReader(content));
+						String line;
 
-								while ((line = reader.readLine()) != null) {
-									builder.append(line);
-									jsonResponse = new JSONObject(line);
-
-								}
-							}
-
-						} catch (Exception e) {
-
-							e.printStackTrace();
+						while ((line = reader.readLine()) != null) {
+							builder.append(line);
+							jsonResponse = new JSONObject(line);
 
 						}
+
 					}
 
 				} catch (Exception e) {
@@ -290,11 +277,13 @@ public class Registro extends Activity {
 		}
 
 		private void handleResult(JSONObject result) {
+			Log.d("el status cde es",statusCode+"");
 			if (statusCode == 200) {
 				Intent itn = new Intent(Registro.this, MainActivity.class);
-				
+
 				itn.putExtra("PARENT_NAME", "Registro");
 				itn.putExtra("json", result.toString());
+				Log.d("asd",result.toString());
 				startActivity(itn);
 
 			} else {
