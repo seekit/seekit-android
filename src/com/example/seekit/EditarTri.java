@@ -293,6 +293,7 @@ public class EditarTri extends Activity {
 				intent.putExtra("json", getIntent().getStringExtra("json"));
 				Log.d("EditarTri",getIntent().getStringExtra("json"));
 				startActivity(intent);
+				finish();
 
 			} else {
 				if (statusCode == 0) {

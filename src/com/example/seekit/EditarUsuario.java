@@ -217,6 +217,7 @@ Log.d("editar usuario",url);
 				itn.putExtra("json", result.toString());
 				Log.d("asd",result.toString());
 				startActivity(itn);
+				finish();
 
 			} else {
 				if (statusCode == 0) {

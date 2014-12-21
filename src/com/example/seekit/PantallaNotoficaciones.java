@@ -79,7 +79,7 @@ public class PantallaNotoficaciones extends Activity {
 				String id = json.getString("idUsuario");
 				String url = "http://192.168.56.1:8080/seekit/seekit/getNotificaciones?idUsuario="
 						+ id;
-
+				Log.d("url",url);
 				HttpGet httpGet = new HttpGet(url);
 
 				try {
@@ -153,9 +153,9 @@ public class PantallaNotoficaciones extends Activity {
 							triObjComp.setNombre(listaTrisCompartido.getJSONObject(j).getString("nombre"));
 							triObjComp.setPerdido(listaTrisCompartido.getJSONObject(j).getString("perdido"));
 							triObjComp.setNombrePropetario(listaTrisCompartido.getJSONObject(j).getString("nombreUsuario"));
-							triObjComp.setApellidoPropietario(listaTrisCompartido.getJSONObject(j).getString("apellidoPropietario"));
-							triObjComp.setMailPropietario(listaTrisCompartido.getJSONObject(j).getString("mailPropietario"));
-							triObjComp.setIdUsuarioPropietario(listaTrisCompartido.getJSONObject(j).getString("idUsuarioPropietario"));
+							triObjComp.setApellidoPropietario(listaTrisCompartido.getJSONObject(j).getString("apellidoUsuario"));
+							triObjComp.setMailPropietario(listaTrisCompartido.getJSONObject(j).getString("mailUsuario"));
+							triObjComp.setIdUsuarioPropietario(listaTrisCompartido.getJSONObject(j).getString("idUsuario"));
 							
 							arrayListaTrisCompartidos.add(triObjComp);
 							
@@ -233,8 +233,8 @@ public class PantallaNotoficaciones extends Activity {
 											idUsuarioPropietario=((TriCompartido) entrada).getIdUsuarioPropietario();
 											confirmarTri="0";
 											idTri=((TriCompartido) entrada).getIdTri();
-											GetNotificacionesTask getNotificacionesTask = new GetNotificacionesTask();
-											getNotificacionesTask.execute();
+											GetConfirmarTask getConfirmarTask = new GetConfirmarTask();
+											getConfirmarTask.execute();
 										} else {
 											Toast.makeText(PantallaNotoficaciones.this, "Network is unavailable!", Toast.LENGTH_LONG)
 													.show();
@@ -291,9 +291,9 @@ public class PantallaNotoficaciones extends Activity {
 
 				HttpClient client = new DefaultHttpClient();
 				String id = json.getString("idUsuario");
-				String url = "http://192.168.56.1:8080/seekit/seekit/ConfirmarTri?idUsuario="
+				String url = "http://192.168.56.1:8080/seekit/seekit/confirmarTri?idUsuario="
 						+ id+"&idUsuarioPropietario="+idUsuarioPropietario+"&idTri="+idTri+"&confirmar="+confirmarTri;
-
+				Log.d("confirmando?",url);
 				HttpGet httpGet = new HttpGet(url);
 
 				try {

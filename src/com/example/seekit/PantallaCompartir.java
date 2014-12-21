@@ -108,7 +108,7 @@ public class PantallaCompartir extends Activity {
 		String editDescripcion = eEditDescripcion.getText().toString();
 
 		if (TextUtils.isEmpty(editDescripcion)) {
-			eEditDescripcion.setError("Por favor, introduzca un mail");
+			eEditDescripcion.setError("Por favor, ingrese comentario");
 			return;
 		}
 		if (TextUtils.isEmpty(mail)) {

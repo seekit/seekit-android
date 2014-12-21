@@ -24,6 +24,8 @@ import android.app.Activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -45,13 +47,18 @@ import android.widget.Toast;
 
 public class Login extends Activity {
 	TextView textViewRegistrarse;
-	public final static String IDUSU = null;
-	// pruebas
 
+	public final static String IDUSU = null;
+
+	//empecemos con algo de guardar los datos
+	//SharedPreferences pref=null;
+	//Editor editor=null;
+	//fin pruebas guardar datos
+	
 	protected JSONObject resultFromWs;
 
 	int statusCode = -1;
-	// fin pruebas
+
 	static InputStream is = null;
 	static JSONObject jObj = null;
 	static String json = "";
@@ -60,12 +67,20 @@ public class Login extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
-
+		//pref=getApplicationContext().getSharedPreferences("MyPref", 0);
+		//editor=pref.edit();
 		// registrarse
 		inicializadores();
+		
+		
+		//pruebas de acuerdo a las preferencies
+		
+		
+		//String aux=pref.getString("nombreMail", null);
+		//Log.d("una prucolor",aux+"");
+		
 
 	}
-	
 
 	private boolean isNetworkAvailable() {
 		ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -101,6 +116,10 @@ public class Login extends Activity {
 		String sMail = mail.getText().toString();
 		EditText contrasena = (EditText) findViewById(R.id.contrasena);
 		String sContrasena = contrasena.getText().toString();
+		
+		//editor.putString("nombreMail", sMail);
+		//editor.commit();
+		
 		if (sMail.equals("") || sContrasena.equals("")) {
 			Toast.makeText(Login.this, "Ingrese algo por favor.",
 					Toast.LENGTH_SHORT).show();
@@ -117,8 +136,9 @@ public class Login extends Activity {
 
 			// PRUEBAS PA QUE QUEDE OK
 
+			
 			if (isNetworkAvailable()) {
-
+				
 				GetLoginTask getloginTask = new GetLoginTask();
 				getloginTask.execute();
 			} else {
@@ -195,7 +215,6 @@ public class Login extends Activity {
 				EditText editMail = (EditText) findViewById(R.id.email);
 				String mail = editMail.getText().toString();
 
-				
 				EditText editPass = (EditText) findViewById(R.id.contrasena);
 				String pass = editPass.getText().toString();
 				HttpClient client = new DefaultHttpClient();
@@ -221,7 +240,7 @@ public class Login extends Activity {
 
 						while ((line = reader.readLine()) != null) {
 							builder.append(line);
-							Log.d("Login",line);
+							Log.d("Login", line);
 							jsonResponse = new JSONObject(line);
 
 						}
@@ -292,6 +311,7 @@ public class Login extends Activity {
 
 		}
 	}
+
 	public boolean isEmailValid(String email) {
 		String regExpn = "^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@"
 				+ "((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
@@ -310,4 +330,10 @@ public class Login extends Activity {
 		else
 			return false;
 	}
+
+
+	
+	
+	
+	
 }
