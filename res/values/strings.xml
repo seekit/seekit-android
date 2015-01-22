@@ -8,6 +8,7 @@
     <string name="action_editTri">edicion</string>
     <string name="action_new">Add TRI</string>
     <string name="action_notificaciones">notificaciones</string>
+    <string name="action_logout">Logout</string>
     <string name="button_send">algo</string>
     <string name="title_activity_pantalla_rastreo">PantallaRastreo</string>
     <string name="title_activity_mainactivity">TRIs</string>

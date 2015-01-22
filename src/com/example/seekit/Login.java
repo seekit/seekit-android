@@ -16,11 +16,14 @@ import org.apache.http.client.methods.HttpGet;
 
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
+
+import com.example.backgroundTasks.MyTestReceiver;
+import com.example.backgroundTasks.MyTestService;
+
 import android.app.Activity;
+
 
 import android.content.Context;
 import android.content.Intent;
@@ -32,8 +35,8 @@ import android.net.NetworkInfo;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 
-import android.text.TextUtils;
 import android.util.Log;
 
 import android.view.Menu;
@@ -50,12 +53,15 @@ public class Login extends Activity {
 
 	public final static String IDUSU = null;
 
-	//empecemos con algo de guardar los datos
-	//SharedPreferences pref=null;
-	//Editor editor=null;
-	//fin pruebas guardar datos
-	
-	protected JSONObject resultFromWs;
+	// empecemos con algo de guardar los datos
+	SharedPreferences pref = null;
+	Editor editor = null;
+	// fin pruebas guardar datos
+
+	// realizaremos las pruebas para obtener un servicio que corra en
+	// background.
+	public MyTestReceiver receiverForTest;
+	// fin pruebas.
 
 	int statusCode = -1;
 
@@ -66,20 +72,67 @@ public class Login extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_login);
-		//pref=getApplicationContext().getSharedPreferences("MyPref", 0);
-		//editor=pref.edit();
-		// registrarse
-		inicializadores();
-		
-		
-		//pruebas de acuerdo a las preferencies
-		
-		
-		//String aux=pref.getString("nombreMail", null);
-		//Log.d("una prucolor",aux+"");
-		
+		// pruebas de acuerdo a las preferencies
 
+		pref = getApplicationContext().getSharedPreferences("MyPref", 0);
+
+		editor = pref.edit();
+		String usuario = null;
+		usuario = pref.getString("usuario", "null");
+		
+		if (!usuario.equals("null")) {
+		
+			Intent itn = new Intent(Login.this, MainActivity.class);
+			itn.putExtra("json", usuario);
+			itn.putExtra("PARENT_NAME", "Login");
+			startActivity(itn);
+			finish();
+		} else {
+		
+			setContentView(R.layout.activity_login);
+		
+			// registrarse
+			inicializadores();
+		}
+
+		// realizaremos las pruebas para obtener un servicio que corra en
+		// background.
+
+		// setupServiceReceiver();
+
+
+
+	}
+
+
+	// Starts the IntentService
+	private void onStartService() {
+		Intent i = new Intent(this, MyTestService.class);
+		i.putExtra("foo", "bar");
+		i.putExtra("receiver", receiverForTest);
+		Log.d("Login", "onStartService");
+		startService(i);
+	}
+
+	// Setup the callback for when data is received from the service
+	private void setupServiceReceiver() {
+		Log.d("Login", "SetupServiceReceiver1");
+		receiverForTest = new MyTestReceiver(new Handler());
+		Log.d("Login", "SetupServiceReceiver2");
+		// This is where we specify what happens when data is received from the
+		// service
+		receiverForTest.setReceiver(new MyTestReceiver.Receiver() {
+			@Override
+			public void onReceiveResult(int resultCode, Bundle resultData) {
+				Log.d("Login", "SetupServiceReceiver3");
+				if (resultCode == RESULT_OK) {
+					String resultValue = resultData.getString("resultValue");
+					Log.d("Login", resultValue);
+					Toast.makeText(Login.this, resultValue, Toast.LENGTH_SHORT)
+							.show();
+				}
+			}
+		});
 	}
 
 	private boolean isNetworkAvailable() {
@@ -116,10 +169,7 @@ public class Login extends Activity {
 		String sMail = mail.getText().toString();
 		EditText contrasena = (EditText) findViewById(R.id.contrasena);
 		String sContrasena = contrasena.getText().toString();
-		
-		//editor.putString("nombreMail", sMail);
-		//editor.commit();
-		
+
 		if (sMail.equals("") || sContrasena.equals("")) {
 			Toast.makeText(Login.this, "Ingrese algo por favor.",
 					Toast.LENGTH_SHORT).show();
@@ -136,9 +186,8 @@ public class Login extends Activity {
 
 			// PRUEBAS PA QUE QUEDE OK
 
-			
 			if (isNetworkAvailable()) {
-				
+				// onStartService();
 				GetLoginTask getloginTask = new GetLoginTask();
 				getloginTask.execute();
 			} else {
@@ -295,10 +344,15 @@ public class Login extends Activity {
 		private void handleResult(JSONObject jsonObj) {
 			// si anda bien, voy a pasar el objeto a la otra intent
 			if (statusCode == 200) {
+				// para el guardado de datos del usuario.
+				editor.putString("usuario", jsonObj.toString());
+				editor.commit();
+				// fin datos
 				Intent itn = new Intent(Login.this, MainActivity.class);
 				itn.putExtra("json", jsonObj.toString());
 				itn.putExtra("PARENT_NAME", "Login");
 				startActivity(itn);
+				finish();
 			} else if (statusCode == 0) {
 				Toast.makeText(Login.this, "El servidor no ha respondido",
 						Toast.LENGTH_SHORT).show();
@@ -331,9 +385,4 @@ public class Login extends Activity {
 			return false;
 	}
 
-
-	
-	
-	
-	
 }

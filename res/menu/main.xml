@@ -19,5 +19,11 @@
         android:icon="@drawable/ic_action_email"
         android:showAsAction="ifRoom"
         android:title="@string/action_notificaciones"/>
+         
+        <item
+        android:id="@+id/action_logout"
+        android:icon="@drawable/ic_action_accounts"
+        android:showAsAction="ifRoom"
+        android:title="@string/action_logout"/>
     
 </menu>

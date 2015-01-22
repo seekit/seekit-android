@@ -39,7 +39,7 @@ public class EditarTri extends Activity {
 	int statusCode=-1;
 	String idTri=null;
 	
-	JSONObject obj=null;
+	JSONObject json=null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -54,7 +54,7 @@ public class EditarTri extends Activity {
 		idTri=getIntent().getStringExtra(
 				"idTri");
 		try {
-			obj = new JSONObject(getIntent().getStringExtra(
+			json = new JSONObject(getIntent().getStringExtra(
 					"json"));
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block

@@ -17,6 +17,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.example.backgroundTasks.MyAlarmReceiver;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -24,8 +25,12 @@ import contenedor.Tri;
 import contenedor.TriCompartido;
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -47,19 +52,24 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
 
 	private ListView lista;
-	protected JSONObject resultFromWs;
-	JSONObject json=null;
+
+	JSONObject json = null;
 	int statusCode = -1;
 	JSONArray jsonArray = null;
 	String parentActivity = null;
+	private String identificadoresSchedule = ",";
+	// empecemos con algo de guardar los datos
+	SharedPreferences pref = null;
+	Editor editor = null;
+
+	// fin pruebas guardar datos
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.listado);
 		try {
-			json = new JSONObject(getIntent().getStringExtra(
-					"json"));
+			json = new JSONObject(getIntent().getStringExtra("json"));
 		} catch (JSONException e1) {
 
 			e1.printStackTrace();
@@ -76,7 +86,6 @@ public class MainActivity extends Activity {
 			try {
 
 				Log.d("Actividad padre?", parentActivity);
-				
 
 				json.getJSONObject("usuario").getString("nombre");
 				JSONArray listaTris = json.getJSONArray("listaTris");
@@ -136,6 +145,7 @@ public class MainActivity extends Activity {
 						Toast.LENGTH_LONG).show();
 			}
 		} else if (parentActivity.equals("Login")) {
+
 			Log.d("Estoy en el main, mi padre es el:", "login");
 			if (isNetworkAvailable()) {
 
@@ -144,9 +154,31 @@ public class MainActivity extends Activity {
 			} else {
 				Toast.makeText(this, "Network is unavailable!",
 						Toast.LENGTH_LONG).show();
-			}			
-			
-			
+			}
+
+		} else if (parentActivity.equals("PantallaRastreo")) {
+
+			Log.d("Estoy en el main, mi padre es el:", "pantalla reastreo");
+			if (isNetworkAvailable()) {
+
+				GetMainActivityTask getMainActivityTask = new GetMainActivityTask();
+				getMainActivityTask.execute();
+			} else {
+				Toast.makeText(this, "Network is unavailable!",
+						Toast.LENGTH_LONG).show();
+			}
+
+		} else if (parentActivity.equals("tester")) {
+			Log.d("Estoy en el main, mi padre es el:", "MyAlarmTestService");
+			if (isNetworkAvailable()) {
+
+				GetMainActivityTask getMainActivityTask = new GetMainActivityTask();
+				getMainActivityTask.execute();
+			} else {
+				Toast.makeText(this, "Network is unavailable!",
+						Toast.LENGTH_LONG).show();
+			}
+
 		}
 
 	}
@@ -162,9 +194,8 @@ public class MainActivity extends Activity {
 			try {
 
 				// ///////////7
-				
-				
-				Log.d("lo que venga del login",json.toString());
+
+				Log.d("lo que venga del login", json.toString());
 				HttpClient client = new DefaultHttpClient();
 				String id = json.getString("idUsuario");
 				Log.d("viene bien1,5",
@@ -187,13 +218,11 @@ public class MainActivity extends Activity {
 						BufferedReader reader = new BufferedReader(
 								new InputStreamReader(content));
 						String line;
-						
+
 						while ((line = reader.readLine()) != null) {
 							builder.append(line);
-							Log.d("mainactivity",line);
-							jsonResponse=new JSONObject(line);
-							
-
+							Log.d("mainactivity", line);
+							jsonResponse = new JSONObject(line);
 
 						}
 					}
@@ -216,25 +245,21 @@ public class MainActivity extends Activity {
 
 			handleResult(result);
 		}
-		
 
 		private void handleResult(JSONObject result) {
 			// si anda bien, voy a pasar el objeto a la otra intent
-			Log.d("satuscode=", statusCode+"");
+			Log.d("satuscode=", statusCode + "");
 			if (statusCode == 200) {
 				try {
 
-			
 					final ArrayList<Tri> arrayListaTris = new ArrayList<Tri>();
 					final ArrayList<TriCompartido> arrayListaTrisCompartidos = new ArrayList<TriCompartido>();
 					JSONArray listaTris = null;
-					JSONArray listaTrisCompartido=null;
+					JSONArray listaTrisCompartido = null;
 
-
-						listaTris = result.getJSONArray("listaTri");
-						listaTrisCompartido=result.getJSONArray("listaTriCompartido");
-						
-
+					listaTris = result.getJSONArray("listaTri");
+					listaTrisCompartido = result
+							.getJSONArray("listaTriCompartido");
 
 					for (int i = 0; i < listaTris.length(); i++) {
 						Log.d("Nest step=", "lista personal");
@@ -249,36 +274,60 @@ public class MainActivity extends Activity {
 										.getJSONObject(i).getString("perdido"),
 								listaTris.getJSONObject(i).getString(
 										"compartido"));
+						// es lo que se va a pasar al scheduler; para que los
+						// busque.
+
+						Log.d("aaa",
+								listaTris.getJSONObject(i).getString(
+										"identificador"));
+
+						identificadoresSchedule = identificadoresSchedule
+								.concat(listaTris.getJSONObject(i).getString(
+										"identificador")
+										+ ",");
+
 						arrayListaTris.add(triObj);
 						Log.d("i=", i + "");
 						if (i == listaTris.length() - 1) {
-							
-						
+
 						}
 					}
-						
-						Log.d("tamaño de ilista compartisos", listaTrisCompartido.length()+"");
-						for (int j = 0; j < listaTrisCompartido.length(); j++) {
-							Log.d("Nest step=", "lista de compartidos");
-							TriCompartido triObjComp =new TriCompartido();
-							triObjComp.setActivo(listaTrisCompartido.getJSONObject(j).getString("activo"));
-							triObjComp.setCompartido(listaTrisCompartido.getJSONObject(j).getString("compartido"));
-							triObjComp.setFoto(listaTrisCompartido.getJSONObject(j).getString("foto"));
-							triObjComp.setHabilitado(listaTrisCompartido.getJSONObject(j).getString("habilitado"));
-							triObjComp.setIdentificador(listaTrisCompartido.getJSONObject(j).getString("identificador"));
-							triObjComp.setIdTri(listaTrisCompartido.getJSONObject(j).getString("idTri"));
-							triObjComp.setLocalizacion(listaTrisCompartido.getJSONObject(j).getString("localizacion"));
-							triObjComp.setNombre(listaTrisCompartido.getJSONObject(j).getString("nombre"));
-							triObjComp.setPerdido(listaTrisCompartido.getJSONObject(j).getString("perdido"));
-							arrayListaTrisCompartidos.add(triObjComp);
-							
-						}
-		                reloadList(arrayListaTris);
-		                reloadListCompartidos(arrayListaTrisCompartidos);
 
-					
-					
-					
+					Log.d("tamaño de ilista compartisos",
+							listaTrisCompartido.length() + "");
+					for (int j = 0; j < listaTrisCompartido.length(); j++) {
+						Log.d("Nest step=", "lista de compartidos");
+						TriCompartido triObjComp = new TriCompartido();
+						triObjComp.setActivo(listaTrisCompartido.getJSONObject(
+								j).getString("activo"));
+						triObjComp.setCompartido(listaTrisCompartido
+								.getJSONObject(j).getString("compartido"));
+						triObjComp.setFoto(listaTrisCompartido.getJSONObject(j)
+								.getString("foto"));
+						triObjComp.setHabilitado(listaTrisCompartido
+								.getJSONObject(j).getString("habilitado"));
+						triObjComp.setIdentificador(listaTrisCompartido
+								.getJSONObject(j).getString("identificador"));
+						triObjComp.setIdTri(listaTrisCompartido
+								.getJSONObject(j).getString("idTri"));
+						triObjComp.setLocalizacion(listaTrisCompartido
+								.getJSONObject(j).getString("localizacion"));
+						triObjComp.setNombre(listaTrisCompartido.getJSONObject(
+								j).getString("nombre"));
+						triObjComp.setPerdido(listaTrisCompartido
+								.getJSONObject(j).getString("perdido"));
+						arrayListaTrisCompartidos.add(triObjComp);
+						// es lo que se va a pasar al scheduler; para que los
+						// busque.
+						identificadoresSchedule = identificadoresSchedule
+								.concat(listaTrisCompartido.getJSONObject(j)
+										.getString("identificador") + ",");
+					}
+					reloadList(arrayListaTris);
+					reloadListCompartidos(arrayListaTrisCompartidos);
+
+					// scheduler
+					scheduleAlarm();
 
 				} catch (JSONException e) {
 
@@ -292,15 +341,17 @@ public class MainActivity extends Activity {
 			}
 
 		}
+		// pruebas alarm
+		// scheduleAlarm();
 
-		
-
+		// fin pruebas
 	}
-	
+
 	private void reloadListCompartidos(
 			ArrayList<TriCompartido> arrayListaTrisCompartidos) {
 		lista = (ListView) findViewById(R.id.ListView_listadoCompartidos);
-		lista.setAdapter(new Lista_adaptador(this, R.layout.entrada, arrayListaTrisCompartidos) {
+		lista.setAdapter(new Lista_adaptador(this, R.layout.entrada,
+				arrayListaTrisCompartidos) {
 			@Override
 			// con el onEntrada voy a insertar todos los textos
 			// corerespondientes a cada entrada.
@@ -310,8 +361,7 @@ public class MainActivity extends Activity {
 							.findViewById(R.id.textView_superior);
 					if (texto_superior_entrada != null)
 						texto_superior_entrada
-								.setText(((TriCompartido) entrada)
-										.getNombre());
+								.setText(((TriCompartido) entrada).getNombre());
 
 					final TextView texto_inferior_entrada = (TextView) view
 							.findViewById(R.id.textView_inferior);
@@ -323,8 +373,7 @@ public class MainActivity extends Activity {
 					final ImageView imagen_entrada = (ImageView) view
 							.findViewById(R.id.imageView_imagen);
 					if (imagen_entrada != null) {
-						imagen_entrada
-								.setImageResource(R.drawable.im_pavo);
+						imagen_entrada.setImageResource(R.drawable.im_pavo);
 
 						// hago que la imagen sea clickeable
 						imagen_entrada
@@ -343,28 +392,31 @@ public class MainActivity extends Activity {
 												.getText().toString();
 										String img = ((TriCompartido) entrada)
 												.getFoto();
-										Log.d("MAin Acivity", " identificador:" + identificador);
+										String ubicacion = ((TriCompartido) entrada)
+												.getLocalizacion();
+										Log.d("MAin Acivity", " identificador:"
+												+ identificador);
 										Log.d("MAin Acivity", "nom:" + nombre);
 										Log.d("MAin Acivity", "img:" + img);
 										Log.d("MAin Acivity",
 												" entrada:"
 														+ ((TriCompartido) entrada)
 																.getIdTri());
-										
-											if (parentActivity.equals("Login")) {
-												intent.putExtra(
-														"json",json.toString());
 
-											} else {
-												intent.putExtra("json",
-														json.toString());
-											}
+										if (parentActivity.equals("Login")) {
+											intent.putExtra("json",
+													json.toString());
 
-										
+										} else {
+											intent.putExtra("json",
+													json.toString());
+										}
 
-										intent.putExtra("identificador", identificador);
+										intent.putExtra("identificador",
+												identificador);
 										intent.putExtra("nombreTri", nombre);
 										intent.putExtra("img", img);
+										intent.putExtra("ubicacion", ubicacion);
 										intent.putExtra("idTri",
 												((TriCompartido) entrada)
 														.getIdTri());
@@ -384,7 +436,7 @@ public class MainActivity extends Activity {
 
 			}
 		});
-		
+
 	}
 
 	private boolean isNetworkAvailable() {
@@ -399,55 +451,34 @@ public class MainActivity extends Activity {
 		return isAvailable;
 	}
 
-	public void reloadList(List<Tri> listaTris) {
-		// aca estoy agregando a la lista, todos los parametros que van a venir
-		// del ws
-		ArrayList<Lista_entrada> datos = new ArrayList<Lista_entrada>();
-		for (int i = 0; i < listaTris.size(); i++) {
-			
-			if (i == 2) {
-				datos.add(new Lista_entrada(R.drawable.im_colibri, listaTris
-						.get(i).getNombre(), listaTris.get(i)
-						.getIdentificador(), listaTris.get(i).getIdTri()));
-			} else {
-				datos.add(new Lista_entrada(R.drawable.im_buho, listaTris
-						.get(i).getNombre(), listaTris.get(i)
-						.getIdentificador(), listaTris.get(i).getIdTri()));
-			}
-
-		}
+	public void reloadList(ArrayList<Tri> listaTris) {
 
 		Log.d("Main Activity", "Recargando la cachoputa lista");
 		lista = (ListView) findViewById(R.id.ListView_listado);
-		lista.setAdapter(new Lista_adaptador(this, R.layout.entrada, datos) {
+		lista.setAdapter(new Lista_adaptador(this, R.layout.entrada, listaTris) {
 			@Override
 			// con el onEntrada voy a insertar todos los textos
 			// corerespondientes a cada entrada.
 			public void onEntrada(final Object entrada, View view) {
 				if (entrada != null) {
-					final TextView texto_superior_entrada = (TextView) view
+					final TextView textoSuperiorNombre = (TextView) view
 							.findViewById(R.id.textView_superior);
-					if (texto_superior_entrada != null)
-						texto_superior_entrada
-								.setText(((Lista_entrada) entrada)
-										.get_textoEncima());
+					if (textoSuperiorNombre != null)
+						textoSuperiorNombre.setText(((Tri) entrada).getNombre());
 
-					final TextView texto_inferior_entrada = (TextView) view
+					final TextView textoInferiorIdentificador = (TextView) view
 							.findViewById(R.id.textView_inferior);
-					if (texto_inferior_entrada != null)
-						texto_inferior_entrada
-								.setText(((Lista_entrada) entrada)
-										.get_textoDebajo());
+					if (textoInferiorIdentificador != null)
+						textoInferiorIdentificador.setText(((Tri) entrada)
+								.getNombre());
 
-					final ImageView imagen_entrada = (ImageView) view
+					final ImageView imagenEntradaImg = (ImageView) view
 							.findViewById(R.id.imageView_imagen);
-					if (imagen_entrada != null) {
-						imagen_entrada
-								.setImageResource(((Lista_entrada) entrada)
-										.get_idImagen());
+					if (imagenEntradaImg != null) {
+						imagenEntradaImg.setImageResource(R.drawable.im_pavo);
 
 						// hago que la imagen sea clickeable
-						imagen_entrada
+						imagenEntradaImg
 								.setOnClickListener(new View.OnClickListener() {
 
 									@Override
@@ -457,37 +488,37 @@ public class MainActivity extends Activity {
 										Intent intent = new Intent(
 												MainActivity.this,
 												PantallaRastreo.class);
-										String identificador = texto_inferior_entrada
+										String identificador = textoInferiorIdentificador
 												.getText().toString();
-										String nombre = texto_superior_entrada
+										String nombre = textoSuperiorNombre
 												.getText().toString();
-										int img = ((Lista_entrada) entrada)
-												.get_idImagen();
-										Log.d("MAin Acivity", " identificador:" + identificador);
+										String img = ((Tri) entrada).getFoto();
+										String perdido = ((Tri) entrada)
+												.getPerdido();
+										String ubicacion = ((Tri) entrada)
+												.getLocalizacion();
+										Log.d("MAin Acivity", " identificador:"
+												+ identificador);
 										Log.d("MAin Acivity", "nom:" + nombre);
 										Log.d("MAin Acivity", "img:" + img);
-										Log.d("MAin Acivity",
-												" entrada:"
-														+ ((Lista_entrada) entrada)
-																.get_IdTri());
-										
-											if (parentActivity.equals("Login")) {
-												intent.putExtra(
-														"json",json.toString());
 
-											} else {
-												intent.putExtra("json",
-														json.toString());
-											}
+										if (parentActivity.equals("Login")) {
+											intent.putExtra("json",
+													json.toString());
 
-										
+										} else {
+											intent.putExtra("json",
+													json.toString());
+										}
 
-										intent.putExtra("identificador", identificador);
+										intent.putExtra("identificador",
+												identificador);
 										intent.putExtra("nombreTri", nombre);
-										intent.putExtra("img", img + "");
+										intent.putExtra("img", img);
+										intent.putExtra("ubicacion", ubicacion);
 										intent.putExtra("idTri",
-												((Lista_entrada) entrada)
-														.get_IdTri());
+												((Tri) entrada).getIdTri());
+										intent.putExtra("perdido", perdido);
 										startActivity(intent);
 										// Toast toast =
 										// Toast.makeText(MainActivity.this,
@@ -586,7 +617,7 @@ public class MainActivity extends Activity {
 				// pongo solo el usuario, el resto no lo quiero ya q lo voy a
 				// recuperar cada vez q entre.
 				if (parentActivity.equals("Login")) {
-					intent.putExtra("json",json.toString());
+					intent.putExtra("json", json.toString());
 				} else {
 					intent.putExtra("json", json.toString());
 				}
@@ -621,14 +652,14 @@ public class MainActivity extends Activity {
 		}
 		if (id == R.id.action_notificaciones) {
 			Log.d("mainActrivity", "Vayamos a la notificaiciones");
-			Intent intent = new Intent(MainActivity.this, PantallaNotoficaciones.class);
+			Intent intent = new Intent(MainActivity.this,
+					PantallaNotoficaciones.class);
 			try {
 
 				// pongo solo el usuario, el resto no lo quiero ya q lo voy a
 				// recuperar cada vez q entre.
-				
-					intent.putExtra("json", json.toString());
-				
+
+				intent.putExtra("json", json.toString());
 
 				startActivity(intent);
 			} catch (Exception e) {
@@ -638,10 +669,64 @@ public class MainActivity extends Activity {
 			return true;
 		}
 
+		if (id == R.id.action_logout) {
+			Log.d("mainActrivity", "Realizando Logout");
+
+			try {
+
+				// pongo solo el usuario, el resto no lo quiero ya q lo voy a
+				// recuperar cada vez q entre.
+				pref = getApplicationContext()
+						.getSharedPreferences("MyPref", 0);
+				editor = pref.edit();
+				editor.clear().commit();
+				cancelAlarm();
+				Intent intent = new Intent(MainActivity.this, Login.class);
+				startActivity(intent);
+				MainActivity.this.finish();
+
+			} catch (Exception e) {
+				Log.d("ACA NUNCA DEBO ESTAR", "ACA NUNCA DEBO ESTAR");
+			}
+
+			return true;
+		}
 		return super.onOptionsItemSelected(item);
 	}
 
-	
-	
-	
+	// pruebas schedule
+	public void scheduleAlarm() {
+		// Construct an intent that will execute the AlarmReceiver
+		Intent intent = new Intent(getApplicationContext(),
+				MyAlarmReceiver.class);
+
+		intent.putExtra("identificadores", identificadoresSchedule);
+		intent.putExtra("json", json.toString());
+		// Create a PendingIntent to be triggered when the alarm goes off
+		final PendingIntent pIntent = PendingIntent.getBroadcast(this,
+				MyAlarmReceiver.REQUEST_CODE, intent,
+				PendingIntent.FLAG_UPDATE_CURRENT);
+		// Setup periodic alarm every 50 seconds
+		long firstMillis = System.currentTimeMillis(); // first run of alarm is
+														// immediate
+		int intervalMillis = 50000; // 5 seconds
+		AlarmManager alarm = (AlarmManager) this
+				.getSystemService(Context.ALARM_SERVICE);
+		alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP, firstMillis,
+				intervalMillis, pIntent);
+	}
+
+	public void cancelAlarm() {
+		Intent intent = new Intent(getApplicationContext(),
+				MyAlarmReceiver.class);
+		final PendingIntent pIntent = PendingIntent.getBroadcast(this,
+				MyAlarmReceiver.REQUEST_CODE, intent,
+				PendingIntent.FLAG_UPDATE_CURRENT);
+		AlarmManager alarm = (AlarmManager) this
+				.getSystemService(Context.ALARM_SERVICE);
+		alarm.cancel(pIntent);
+	}
+
+	// fin pruebas schedule
+
 }

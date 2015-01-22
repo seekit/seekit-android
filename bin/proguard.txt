@@ -1,31 +1,37 @@
-# view AndroidManifest.xml #generated:68
+# view AndroidManifest.xml #generated:104
+-keep class com.example.backgroundTasks.MyAlarmReceiver { <init>(...); }
+
+# view AndroidManifest.xml #generated:109
+-keep class com.example.backgroundTasks.MyAlarmTestService { <init>(...); }
+
+# view AndroidManifest.xml #generated:70
 -keep class com.example.seekit.AddTri { <init>(...); }
 
-# view AndroidManifest.xml #generated:84
+# view AndroidManifest.xml #generated:86
 -keep class com.example.seekit.EditarTri { <init>(...); }
 
-# view AndroidManifest.xml #generated:80
+# view AndroidManifest.xml #generated:82
 -keep class com.example.seekit.EditarUsuario { <init>(...); }
 
-# view AndroidManifest.xml #generated:43
+# view AndroidManifest.xml #generated:45
 -keep class com.example.seekit.Login { <init>(...); }
 
-# view AndroidManifest.xml #generated:72
+# view AndroidManifest.xml #generated:74
 -keep class com.example.seekit.MainActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:56
+# view AndroidManifest.xml #generated:58
 -keep class com.example.seekit.Maps { <init>(...); }
 
-# view AndroidManifest.xml #generated:88
+# view AndroidManifest.xml #generated:90
 -keep class com.example.seekit.PantallaCompartir { <init>(...); }
 
-# view AndroidManifest.xml #generated:92
+# view AndroidManifest.xml #generated:94
 -keep class com.example.seekit.PantallaNotoficaciones { <init>(...); }
 
-# view AndroidManifest.xml #generated:52
+# view AndroidManifest.xml #generated:54
 -keep class com.example.seekit.PantallaRastreo { <init>(...); }
 
-# view AndroidManifest.xml #generated:76
+# view AndroidManifest.xml #generated:78
 -keep class com.example.seekit.Registro { <init>(...); }
 
 # view res/layout/activity_maps.xml #generated:2

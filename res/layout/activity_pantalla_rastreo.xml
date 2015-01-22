@@ -8,7 +8,6 @@
         android:id="@+id/RContenedor"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        
         android:orientation="vertical" >
 
         <LinearLayout
@@ -17,8 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerInParent="true"
-            android:layout_marginTop="30dp"
-         >
+            android:layout_marginTop="30dp" >
 
             <ImageView
                 android:id="@+id/imageView1"
@@ -33,8 +31,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerInParent="true"
-            
-        
             android:orientation="horizontal" >
 
             <ImageButton
@@ -43,21 +39,34 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/share_icon" />
 
-
-           <ImageButton
-                android:id="@+id/imageButtonLost"
+            <LinearLayout
+                android:id="@+id/linearLayoutBtnLost"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/lost_icon"
-                android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp" />
-           
-           <ImageButton
+                
+                android:orientation="vertical" >
+
+                <ImageButton
+                    android:id="@+id/imageButtonLost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:src="@drawable/lost_icon" />
+                
+               <TextView
+                android:id="@+id/textViewInformePerdido"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="20sp" />
+            </LinearLayout>
+
+            <ImageButton
                 android:id="@+id/imageButtonMap"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/map_icon"
-                />
+                android:src="@drawable/map_icon" />
         </LinearLayout>
     </RelativeLayout>
 
